@@ -68,7 +68,7 @@ BaseClientApplication *SpawnApplication(Variant configuration);
 BaseProtocolFactory *SpawnFactory(Variant configuration);
 #endif /* COMPILE_STATIC */
 
-int main(int argc, const char **argv) {
+int main__(int argc, const char **argv) {
 	//1. Pick up the startup parameters and hold them inside the running status
 	if (argc < 2) {
 		fprintf(stdout, "Invalid command line. Use --help\n");

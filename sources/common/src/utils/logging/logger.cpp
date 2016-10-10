@@ -222,20 +222,23 @@ void Logger::Free(bool freeAppenders) {
 void Logger::Log(int32_t level, const char *pFileName, uint32_t lineNumber,
 		const char *pFunctionName, const char *pFormatString, ...) {
 	LOCK;
-	if (_pLogger == NULL)
-		return;
+//  if (_pLogger == NULL)
+//		return;
 
 	va_list arguments;
 	va_start(arguments, pFormatString);
 	string message = vFormat(pFormatString, arguments);
 	va_end(arguments);
 
-	FOR_VECTOR(_pLogger->_logLocations, i) {
+  printf("%s\n", message.c_str());
+  /*
+  FOR_VECTOR(_pLogger->_logLocations, i) {
 		if (_pLogger->_logLocations[i]->EvalLogLevel(level, pFileName, lineNumber,
 				pFunctionName))
 			_pLogger->_logLocations[i]->Log(level, pFileName,
 				lineNumber, pFunctionName, message);
 	}
+  */
 }
 
 bool Logger::AddLogLocation(BaseLogLocation *pLogLocation) {
