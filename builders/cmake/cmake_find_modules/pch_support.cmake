@@ -2,6 +2,7 @@
 #http://www.mail-archive.com/cmake@cmake.org/msg04394.html
 
 IF(CMAKE_COMPILER_IS_GNUCXX)
+    IF(IS_ENABLED_PRECOMPILED_HEADERS)
 	EXEC_PROGRAM(
 		${CMAKE_CXX_COMPILER}
 		ARGS                    --version
@@ -18,9 +19,11 @@ IF(CMAKE_COMPILER_IS_GNUCXX)
 			SET(PCHSupport_FOUND TRUE)
 		ENDIF()
 	ENDIF()
+	ENDIF()
 ENDIF()
 
 MACRO(ADD_PRECOMPILED_HEADER _targetName _input )
+    IF(IS_ENABLED_PRECOMPILED_HEADERS)
 	#get the file name (no path)
 	GET_FILENAME_COMPONENT(_name ${_input} NAME_WE)
 
@@ -84,5 +87,6 @@ MACRO(ADD_PRECOMPILED_HEADER _targetName _input )
 		SET_TARGET_PROPERTIES(${_targetName} PROPERTIES COMPILE_FLAGS "-include-pch ${_output} -Winvalid-pch")
 	ELSE()
 		SET_TARGET_PROPERTIES(${_targetName} PROPERTIES COMPILE_FLAGS "-I${_outdir} -include ${_name} -Winvalid-pch")
+	ENDIF()
 	ENDIF()
 ENDMACRO()
