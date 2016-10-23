@@ -80,7 +80,7 @@ int main__(int argc, const char **argv) {
 		return -1;
 	}
 	string configFile = argv[argc - 1];
-	configFile = normalizePath(configFile, "");
+//	configFile = normalizePath(configFile, "");
 	NormalizeCommandLine(configFile);
 
 	if ((bool)gRs.commandLine["arguments"]["--help"]) {
@@ -93,10 +93,10 @@ int main__(int argc, const char **argv) {
 		return 0;
 	}
 
-	if (configFile == "") {
-		fprintf(stderr, "Configuration file not found: `%s`\n", argv[argc - 1]);
-		return -1;
-	}
+//	if (configFile == "") {
+//		fprintf(stderr, "Configuration file not found: `%s`\n", argv[argc - 1]);
+//		return -1;
+//	}
 
 	SRAND();
 	InitNetworking();
