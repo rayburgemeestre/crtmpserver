@@ -268,6 +268,8 @@ bool Initialize() {
 	return true;
 }
 
+extern volatile bool starcry_running;
+
 void Run() {
 	if (!ApplyUIDGID()) {
 		FATAL("Unable to apply user id");
@@ -275,7 +277,7 @@ void Run() {
 	}
 	INFO("\n%s", STR(gRs.pConfigFile->GetServicesInfo()));
 	INFO("GO! GO! GO! (%"PRIu32")", (uint32_t) GetPid());
-	while (IOHandlerManager::Pulse()) {
+	while (IOHandlerManager::Pulse() && starcry_running) {
 		IOHandlerManager::DeleteDeadHandlers();
 		ProtocolManager::CleanupDeadProtocols();
 	}
