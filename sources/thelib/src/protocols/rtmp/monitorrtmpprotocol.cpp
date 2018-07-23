@@ -39,7 +39,7 @@ MonitorRTMPProtocol::MonitorRTMPProtocol(uint32_t maxStreamCount,
 	_channels = NULL;
 	_channels = new Channel[maxChannelsCount];
 	for (uint32_t i = 0; i < _maxChannelsCount; i++) {
-		memset(&_channels[i], 0, sizeof (Channel));
+		memset((void *)&_channels[i], 0, sizeof (Channel));
 		_channels[i].id = i;
 		_channels[i].lastOutStreamId = 0xffffffff;
 	}
@@ -278,7 +278,7 @@ bool MonitorRTMPProtocol::ProcessBytes(IOBuffer &buffer) {
 						if ((uint8_t) VH_MT(msg) == RM_HEADER_MESSAGETYPE_ABORTMESSAGE) {
 							uint32_t channelId = (uint32_t) msg[RM_ABORTMESSAGE];
 							if (channelId >= _maxChannelsCount) {
-								FATAL("Invalid channel id in reset message: %"PRIu32, channelId);
+								FATAL("Invalid channel id in reset message: %" PRIu32, channelId);
 								return false;
 							}
 							o_assert(_channels[channelId].id == channelId);
