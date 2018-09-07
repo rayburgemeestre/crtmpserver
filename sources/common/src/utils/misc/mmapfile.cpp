@@ -188,7 +188,7 @@ bool MmapFile::Initialize(string path, uint32_t windowSize) {
 
 	//5. Get the info and save it in this instance
 	_fd = _fds[_path].fd;
-	_path = _path;
+	//_path = _path;
 	_size = _fds[_path].size;
 
 	//6. We are done
