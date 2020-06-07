@@ -1035,7 +1035,7 @@ void Variant::PushToArray(Variant value) {
 map<string, Variant>::iterator Variant::begin() {
 	if ((_type != V_TYPED_MAP) && (_type != V_MAP)) {
 		ASSERT("This is not a map-like variant: %s", STR(ToString()));
-		map<string, Variant> temp;
+		static map<string, Variant> temp;
 		return temp.begin();
 	}
 	return _value.m->children.begin();
@@ -1044,7 +1044,7 @@ map<string, Variant>::iterator Variant::begin() {
 map<string, Variant>::iterator Variant::end() {
 	if ((_type != V_TYPED_MAP) && (_type != V_MAP)) {
 		ASSERT("This is not a map-like variant: %s", STR(ToString()));
-		map<string, Variant> temp;
+		static map<string, Variant> temp;
 		return temp.end();
 	}
 	return _value.m->children.end();
